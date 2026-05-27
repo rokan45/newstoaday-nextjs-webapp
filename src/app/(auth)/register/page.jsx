@@ -1,4 +1,5 @@
 'use client'
+import { authClient } from '@/lib/auth-client';
 import Link from 'next/link';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -7,8 +8,21 @@ const RegisterPage = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const handleRegister = (data) => {
+    const handleRegister = async (data) => {
         console.log(data, "data");
+
+        const { name, email, photo, password } = data;
+
+        const { data:user, error } = await authClient.signUp.email({
+            name: name,
+            email: email,
+            password: password,
+            image: photo,
+            callbackURL:'/',
+            
+        });
+        console.log(user,error);
+
     }
 
 
@@ -32,7 +46,7 @@ const RegisterPage = () => {
                         <label class="block text-sm font-bold text-[#333333]">Name</label>
                         <input
                             type="text"
-                            
+
                             placeholder="Your Name"
                             class="w-full bg-[#f3f3f3] text-sm text-[#333333] placeholder-[#b3b3b3] p-4 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
 
@@ -47,14 +61,14 @@ const RegisterPage = () => {
                         <label class="block text-sm font-bold text-[#333333]">Email address</label>
                         <input
                             type="email"
-                            
+
                             placeholder="Enter your email address"
                             class="w-full bg-[#f3f3f3] text-sm text-[#333333] placeholder-[#b3b3b3] p-4 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
 
                             {...register("email", { required: 'true' })}
 
                         />
-                          {errors.email && <span className='text-red-600 font-semibold'>This field is required</span>}
+                        {errors.email && <span className='text-red-600 font-semibold'>This field is required</span>}
                     </div>
 
                     {/* photo Url */}
@@ -62,14 +76,14 @@ const RegisterPage = () => {
                         <label class="block text-sm font-bold text-[#333333]">Photo URL</label>
                         <input
                             type="text"
-                            
+
                             placeholder="Place the photo link"
                             class="w-full bg-[#f3f3f3] text-sm text-[#333333] placeholder-[#b3b3b3] p-4 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
 
                             {...register("photo", { required: 'true' })}
 
                         />
-                          {errors.photo && <span className='text-red-600 font-semibold'>This field is required</span>}
+                        {errors.photo && <span className='text-red-600 font-semibold'>This field is required</span>}
                     </div>
 
 
@@ -78,7 +92,7 @@ const RegisterPage = () => {
                         <label class="block text-sm font-bold text-[#333333]">Password</label>
                         <input
                             type="password"
-                            
+
                             placeholder="Enter your password"
                             class="w-full bg-[#f3f3f3] text-sm text-[#333333] placeholder-[#b3b3b3] p-4 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
 
