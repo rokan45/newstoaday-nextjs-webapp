@@ -23,6 +23,13 @@ const RegisterPage = () => {
         });
         console.log(user,error);
 
+        if(error){
+            alert(error.message)
+        }
+        if(res){
+            alert("Login Successfully!")
+        }
+
     }
 
 
