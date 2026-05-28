@@ -9,9 +9,9 @@ const Navbar = () => {
 
 
     const { data: session } = authClient.useSession();
-    console.log(session,"user session");
+    console.log(session, "user session");
 
-    const user=session?.user;
+    const user = session?.user;
     console.log(user, "user");
 
     return (
@@ -31,12 +31,18 @@ const Navbar = () => {
             </div>
 
             {/* Right Container */}
-            <div className='flex-1 flex items-center justify-end gap-2'>
-                <Image src={user.photo || avatar} alt='user avatar' width={50} height={50} />
-                <Link href={'/login'}>
-                    <button className='btn btn-accent font-bold text-white'>Login</button>
-                </Link>
-            </div>
+            {
+                user ? <div className='flex-1 flex items-center justify-end gap-2'>
+                    <h2>Hello! I'm {user.name}</h2>
+                    <Image src={user.image || avatar} alt='user avatar' className='rounded-full' width={50} height={50} />
+                    <Link href={'/login'}>
+                        <button className='btn btn-accent font-bold text-white'>Logout</button>
+                    </Link>
+                </div> :
+                    <Link href={'/login'}>
+                        <button className='btn btn-accent font-bold text-white'>Logout</button>
+                    </Link>
+            }
         </div>
     );
 };
