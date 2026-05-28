@@ -1,5 +1,6 @@
 import Image from "next/image";
 import banner from "@/assets/playground.png"
+import logo from "@/assets/fb.png"
 
 export default function Home() {
   return (
@@ -23,6 +24,11 @@ export default function Home() {
       {/* Side bar */}
       <div className="col-span-3 bg-purple-500">
         <h1 className="text-2xl font-bold">Login With</h1>
+        <div>
+          <button>
+            <Image src={logo}></Image>Login  with facebook
+          </button>
+        </div>
       </div>
     </div>
   );

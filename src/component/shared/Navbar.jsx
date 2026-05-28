@@ -5,6 +5,7 @@ import React from 'react';
 import avatar from '@/assets/user.png'
 import { authClient } from '@/lib/auth-client';
 
+
 const Navbar = () => {
 
 
